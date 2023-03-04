@@ -12,6 +12,19 @@ import inquirer from "inquirer";
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+const nextPrompt = async () => {
+  const response = await inquirer.prompt([
+    {
+      type: "list",
+      message: "What do you want to do next?",
+      name: "next",
+      choices: ["Add an engineer", "Add an intern", "Finish building team"],
+    },
+  ]);
+  return response;
+};
+
+
 const engineerPrompt = async () => {
   const response = await inquirer.prompt([
     {
@@ -62,12 +75,12 @@ const engineerPrompt = async () => {
         }
       },
     },
-    {
-      type: "list",
-      message: "What do you want to do next?",
-      name: "next",
-      choices: ["Add an engineer", "Add an intern", "Finish building team"],
-    },
+    // {
+    //   type: "list",
+    //   message: "What do you want to do next?",
+    //   name: "next",
+    //   choices: ["Add an engineer", "Add an intern", "Finish building team"],
+    // },
   ]);
   return response;
 };
@@ -124,12 +137,12 @@ const internPrompt = async () => {
         }
       },
     },
-    {
-      type: "list",
-      message: "What do you want to do next?",
-      name: "next",
-      choices: ["Add an engineer", "Add an intern", "Finish building team"],
-    },
+    // {
+    //   type: "list",
+    //   message: "What do you want to do next?",
+    //   name: "next",
+    //   choices: ["Add an engineer", "Add an intern", "Finish building team"],
+    // },
   ]);
   return response;
 };
@@ -187,35 +200,43 @@ const managerPrompt = async () => {
           }
         },
       },
-      {
-        type: "list",
-        message: "What do you want to do next?",
-        name: "next",
-        choices: ["Add an engineer", "Add an intern", "Finish building team"],
-      },
+      // {
+      //   type: "list",
+      //   message: "What do you want to do next?",
+      //   name: "next",
+      //   choices: ["Add an engineer", "Add an intern", "Finish building team"],
+      // },
     ]);
     return response;
 }
 
 //console.log(await managerPrompt());
 
+let employees = [];
 const promptUser = async () => {
   await managerPrompt()
-    .then(async (response) => {
-      console.log(response);
+    .then(async (manager) => {
+      employees.push(manager);
+      let response = await nextPrompt();
       while (response.next !== "Finish building team") {
         if (response.next === "Add an engineer") {
           console.log("***************************************");
           console.log("Adding an engineer");
-          response = await engineerPrompt();
+          let engineer = await engineerPrompt();
+          employees.push(engineer);
+          response = await nextPrompt();
         }
         if (response.next === "Add an intern") {
           console.log("***************************************");
           console.log("Adding an intern");
-          response = await internPrompt();
+          let intern = await internPrompt();
+          employees.push(intern);
+          response = await nextPrompt();
         }
       }
     });
+    console.log(employees);
+    return employees;
 };
 
 // Bonus using async/await and try/catch
