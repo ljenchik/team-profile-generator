@@ -15,7 +15,7 @@ node index.js
 ```
 
 <p float="center">
-<img src="./assets/screenshot1.png"  width="300"/>
+<img src="./assets/screenshot.png"  width="300"/>
 </p>
 
-<a href="" > Link to the demo </a>
+<a href="https://drive.google.com/file/d/1siUsY_tkLWRTxy2jOxlZqQ34C_mHxWnf/view" > Link to the demo </a>
