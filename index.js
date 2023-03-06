@@ -232,13 +232,17 @@ let promptUser = () => {
         .then((response) => answer = response) ;
         }
 
-
         // Render HTML file
-        renderHTML(employees);
-        console.log(renderHTML(employees));
+        const renderedHTML = renderHTML(employees);
+        // Create team.html file
+        fs.writeFile(outputPath, renderedHTML, (error) => {
+              return error
+              ? console.log(error)
+              : console.log('Your team was successfully built!')
+          })
+
       });
     }
-
     teamMembers();
   });
 };
