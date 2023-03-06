@@ -1,24 +1,8 @@
-.jumbotron {
-    background-color: red;
+
+.card-header {
+    height: 40% !important;
 }
 
-.manager {
-    background-color: blue;
-}
-
-.engineer {
-    background-color: green;
-}
-
-.intern {
-    background-color: blueviolet;
-}
-
-.team-area {
-    gap: 10px;
-}
-
-.card {
-    margin: 10px;
-    width: 20%;
+.d-flex {
+    flex-wrap: wrap;
 }
